@@ -1,0 +1,22 @@
+{#- Отзывы. Скрыты, пока site.features.reviews = false (src/_data/site.js).
+    Формат src/_data/reviews.json: [{ "name": "Имя", "role": "Магазин на Ozon", "text": "Текст отзыва" }] -#}
+{%- if site.features.reviews and reviews.length %}
+<section class="section section--tight" aria-labelledby="reviews-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="reviews-title">Отзывы селлеров</h2>
+    </div>
+    <ul class="reviews">
+      {%- for r in reviews %}
+      <li class="card reveal">
+        <div class="review__head">
+          <span class="review__avatar" aria-hidden="true">{{ r.name | first }}</span>
+          <div><p class="review__name">{{ r.name }}</p><p class="review__role">{{ r.role }}</p></div>
+        </div>
+        <p class="review__text">{{ r.text }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}

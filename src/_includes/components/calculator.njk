@@ -1,0 +1,38 @@
+{#- Калькулятор стоимости. Коэффициенты — src/_data/calculator.json -#}
+<form class="calc reveal" data-calc onsubmit="return false" aria-label="Калькулятор стоимости маркировки">
+  <div class="panel calc__fields">
+    <div class="calc__row">
+      <div class="field">
+        <label class="field__label" for="calc-group">Товарная группа</label>
+        <select class="select" id="calc-group" name="group">
+          <option value="">Выберите группу</option>
+          {%- for g in groups %}
+          <option value="{{ g.slug }}">{{ g.name }}</option>
+          {%- endfor %}
+          <option value="other">Другое</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="calc-sku">Количество артикулов</label>
+        <input class="input mono" id="calc-sku" name="sku" type="number" inputmode="numeric" min="1" step="1" value="1">
+      </div>
+      <div class="field">
+        <label class="field__label" for="calc-units">Количество единиц</label>
+        <input class="input mono" id="calc-units" name="units" type="number" inputmode="numeric" min="1" step="1" value="100">
+      </div>
+    </div>
+    <label class="switch">
+      <input type="checkbox" name="china" role="switch">
+      <span class="switch__track" aria-hidden="true"></span>
+      <span class="switch__text">Маркировка в Китае<span class="switch__hint">Нанесём коды на товар на складе в Китае</span></span>
+    </label>
+  </div>
+
+  <div class="panel calc__total">
+    <p class="calc__total-label">Итого</p>
+    <p class="calc__sum" aria-live="polite" data-calc-sum>от <span class="stub">[N]</span> ₽</p>
+    <button class="btn btn--primary btn--block" type="button" data-calc-submit>Получить точный расчёт {% icon "arrow-right", "icon--arrow" %}</button>
+    <p class="calc__note">Обязательные расходы (стоимость кодов, взнос ГС1, ЭДО) оплачиваются отдельно напрямую — мы подскажем точные суммы.</p>
+  </div>
+  <script type="application/json" data-calc-config>{{ calculator | json | safe }}</script>
+</form>

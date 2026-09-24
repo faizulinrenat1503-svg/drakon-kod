@@ -1,0 +1,70 @@
+{%- from "components/macros.njk" import leadForm with context -%}
+{%- set pageTitle = (title + " — " + site.brand) if title and not fullTitle else (fullTitle or site.brand) -%}
+{%- set pageDescription = description or site.defaultDescription -%}
+{%- set canonical = site.url + page.url -%}
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+  <link rel="canonical" href="{{ canonical }}">
+  {%- if noindex %}<meta name="robots" content="noindex">{% endif %}
+  <meta name="theme-color" content="#16202A">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.brand }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ site.url }}/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  {% include "components/header.njk" %}
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  {% include "components/footer.njk" %}
+
+  <div class="sticky-cta" id="stickyCta">
+    <a class="btn btn--primary btn--block" href="#zayavka" data-lead>Оставить заявку {% icon "arrow-right", "icon--arrow" %}</a>
+  </div>
+
+  <dialog class="modal" id="leadModal" aria-labelledby="leadModalTitle">
+    <div class="modal__inner">
+      <div class="modal__head">
+        <h2 class="modal__title" id="leadModalTitle">Оставить заявку</h2>
+        <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">{% icon "x" %}</button>
+      </div>
+      <p class="modal__text">Перезвоним, посчитаем стоимость и ответим на вопросы.</p>
+      {{ leadForm("modal") }}
+    </div>
+  </dialog>
+
+  <script>
+    window.DK_CONFIG = {{ {
+      endpoint: site.form.endpoint,
+      mock: eleventy.env.runMode == "serve",
+      phone: site.contacts.phone,
+      phoneHref: site.contacts.phoneHref
+    } | json | safe }};
+  </script>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "odezhda",
+    "name": "Одежда и текстиль",
+    "nameGenitive": "одежды и текстиля",
+    "icon": "shirt",
+    "short": "Одежда, бельё, постельное бельё, полотенца [ПРОВЕРИТЬ]",
+    "badge": null,
+    "cardNote": null,
+    "alert": null
+  },
+  {
+    "slug": "igrushki",
+    "name": "Игрушки",
+    "nameGenitive": "игрушек",
+    "icon": "horse-toy",
+    "short": "Игрушки для детей до 14 лет: куклы, конструкторы, настольные игры [ПРОВЕРИТЬ]",
+    "badge": { "text": "Горячее", "tone": "warn" },
+    "cardNote": "С 1 сентября — продажа только с кодом [ПРОВЕРИТЬ]",
+    "alert": {
+      "tone": "warn",
+      "text": "С 1 сентября 2026 года продавать игрушки без маркировки запрещено [ПРОВЕРИТЬ]"
+    }
+  },
+  {
+    "slug": "obuv",
+    "name": "Обувь",
+    "nameGenitive": "обуви",
+    "icon": "shoe",
+    "short": "Повседневная, спортивная и детская обувь [ПРОВЕРИТЬ]",
+    "badge": null,
+    "cardNote": null,
+    "alert": null
+  },
+  {
+    "slug": "kosmetika",
+    "name": "Косметика и бытовая химия",
+    "nameGenitive": "косметики и бытовой химии",
+    "icon": "perfume",
+    "short": "Косметика, парфюмерия, средства гигиены, бытовая химия [ПРОВЕРИТЬ]",
+    "badge": null,
+    "cardNote": null,
+    "alert": null
+  },
+  {
+    "slug": "bytovaya-tehnika",
+    "name": "Бытовая техника",
+    "nameGenitive": "бытовой техники",
+    "icon": "wash-machine",
+    "short": "Крупная и мелкая бытовая техника [ПРОВЕРИТЬ]",
+    "badge": { "text": "Новая группа", "tone": "accent" },
+    "cardNote": null,
+    "alert": {
+      "tone": "accent",
+      "text": "Новая товарная группа — подготовьтесь заранее. Сроки: [ПРОВЕРИТЬ]"
+    }
+  },
+  {
+    "slug": "tovary-dlya-doma",
+    "name": "Товары для дома",
+    "nameGenitive": "товаров для дома",
+    "icon": "sofa",
+    "short": "Посуда, декор и другие товары для дома [ПРОВЕРИТЬ]",
+    "badge": { "text": "Скоро", "tone": "muted" },
+    "cardNote": null,
+    "alert": {
+      "tone": "accent",
+      "text": "Ожидается обязательная маркировка. Сроки: [ПРОВЕРИТЬ]"
+    }
+  }
+]

@@ -1,0 +1,171 @@
+---
+layout: layouts/base.njk
+fullTitle: "Маркировка товаров для маркетплейсов — Дракон.Код"
+description: "Маркировка «Честный знак» для селлеров Wildberries, Ozon, Яндекс Маркета: подключение, карточки, коды и этикетки, ввод в оборот. Маркировка товаров в Китае до отправки в Россию."
+---
+{%- from "components/macros.njk" import leadButton, leadSection, groupCard, serviceSteps, faqList, faqSchema with context -%}
+{%- set homeFaq = [] -%}
+{%- for topic in faq.topics -%}{%- for item in topic.items -%}{%- if item.home and homeFaq.length < 5 -%}{%- set _ = homeFaq.push(item) -%}{%- endif -%}{%- endfor -%}{%- endfor -%}
+
+{#- 1. Первый экран -#}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div>
+      <p class="eyebrow">Центр маркировки · WB · Ozon · Яндекс Маркет</p>
+      <h1 class="hero__title" id="hero-title">Маркировка для маркетплейсов — <span class="hl">без&nbsp;штрафов</span> и простоев</h1>
+      <p class="hero__sub">Регистрация, карточки, коды и этикетки — под ключ. Везёте товар из Китая? Промаркируем прямо там.</p>
+      <div class="hero__actions">
+        {{ leadButton("Рассчитать стоимость", "primary", "", "Хочу рассчитать стоимость маркировки") }}
+        {{ leadButton("Связаться с нами", "outline") }}
+      </div>
+      <ul class="stats">
+        {%- for s in site.stats %}
+        <li class="stat"><span class="stat__value">{{ s.value | stub | safe }}</span><span class="stat__label">{{ s.label }}</span></li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    <div class="label-card scales" aria-hidden="true">
+      <div class="tag">
+        <p class="tag__title">Футболка женская</p>
+        <div class="tag__code">{% datamatrix 18, 11 %}<span class="scanner"></span></div>
+        <p class="tag__lines"><span>АРТ: DK-00128</span><span>ЦВЕТ: БЕЛЫЙ</span><span>РАЗМЕР: M</span></p>
+      </div>
+      <p class="status-pill"><span class="status-pill__check">{% icon "check" %}</span>Введён в оборот</p>
+    </div>
+  </div>
+</section>
+
+{#- 2. От нуля до поставки -#}
+<section class="section section--tight" aria-labelledby="steps-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="steps-title">От нуля до поставки — за вас</h2>
+      <p class="section__lead">Вам не нужно разбираться в системе. Вы присылаете данные о товаре — мы возвращаем готовые коды и этикетки.</p>
+    </div>
+    {{ serviceSteps(true) }}
+  </div>
+</section>
+
+{#- 3. Товарные группы -#}
+<section class="section section--tight" aria-labelledby="groups-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="groups-title">Нужна ли маркировка вашему товару?</h2>
+      <a class="link-arrow" href="/tovarnye-gruppy/"><span>Все товарные группы</span>{% icon "arrow-right" %}</a>
+    </div>
+    <ul class="groups">
+      {%- for g in groups %}
+      <li class="reveal">{{ groupCard(g) }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{#- 4. Маркировка в Китае -#}
+<section class="section section--tight" aria-labelledby="china-title">
+  <div class="container">
+    <div class="panel china scales scales--right reveal">
+      <div class="china__grid">
+        <div>
+          <h2 class="china__title" id="china-title">Маркировка в Китае — до отправки в Россию</h2>
+          <p class="china__text">Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
+          <div class="china__actions">{{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку в Китае") }}</div>
+        </div>
+        <ol class="china-steps">
+          {%- set chinaSteps = [
+            { icon: "file-text", text: "Оформляем коды заранее — пока товар ещё производится" },
+            { icon: "barcode", text: "Наносим на складе в Китае — каждая единица со своим кодом" },
+            { icon: "truck-delivery", text: "Товар приезжает готовым — сразу на склад маркетплейса" }
+          ] %}
+          {%- for st in chinaSteps %}
+          <li class="card china-step" style="position:relative">
+            <span class="china-step__icon">{% icon st.icon %}</span>
+            <span class="china-step__num">0{{ loop.index }}</span>
+            <span class="china-step__text">{{ st.text }}</span>
+            {%- if not loop.last %}<span class="china-step__arrow" aria-hidden="true">{% icon "arrow-right" %}</span>{% endif %}
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+{#- 5. Калькулятор -#}
+<section class="section section--tight" aria-labelledby="calc-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="calc-title">Сколько стоит маркировка</h2>
+    </div>
+    {% include "components/calculator.njk" %}
+  </div>
+</section>
+
+{#- 6. Почему Дракон.Код -#}
+<section class="section section--tight" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="why-title">Почему Дракон.Код</h2>
+    </div>
+    {%- set why = [
+      { icon: "building-store", title: "Работаем с маркетплейсами и Китаем", text: "Знаем требования площадок и особенности импорта." },
+      { icon: "truck", title: "Логистика в группе компаний", text: "[ПРОВЕРИТЬ формулировку]" },
+      { icon: "shield-check", title: "Коды и этикетки без ошибок", text: "Проверяем данные до отправки." },
+      { icon: "user", title: "Персональный менеджер", text: "На связи и быстро решает вопросы." }
+    ] %}
+    <ul class="why">
+      {%- for w in why %}
+      <li class="card why__card reveal">
+        <span class="card__icon">{% icon w.icon %}</span>
+        <h3 class="card__title">{{ w.title }}</h3>
+        <p class="card__text">{{ w.text | stub | safe }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{#- 7. Как проходит первый заказ (вместо отзывов) -#}
+<section class="section section--tight" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="process-title">Как проходит первый заказ</h2>
+    </div>
+    {%- set process = [
+      { title: "Оставляете заявку", text: "Заполните форму — менеджер перезвонит." },
+      { title: "Считаем стоимость и сроки", text: "Проверяем товары и называем цену до начала работ." },
+      { title: "Собираем данные о товаре", text: "Подскажем, что нужно, и проверим всё до отправки." },
+      { title: "Получаете готовые коды и этикетки", text: "Файлы для печати и документы для приёмки." }
+    ] %}
+    <ol class="process">
+      {%- for p in process %}
+      <li class="process__item reveal">
+        <span class="process__num" aria-hidden="true">0{{ loop.index }}</span>
+        <div>
+          <h3 class="process__title">{{ p.title }}</h3>
+          <p class="process__text">{{ p.text }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{#- Отзывы: выводятся только при site.features.reviews = true и непустом reviews.json -#}
+{% include "components/reviews.njk" %}
+
+{#- 8. Частые вопросы -#}
+<section class="section section--tight" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="section__head section__head--stack reveal">
+      <h2 class="section__title" id="faq-title">Частые вопросы</h2>
+      <a class="link-arrow" href="/voprosy/"><span>Все вопросы</span>{% icon "arrow-right" %}</a>
+    </div>
+    <div class="reveal">{{ faqList(homeFaq) }}</div>
+  </div>
+</section>
+{{ faqSchema(homeFaq) }}
+
+{#- 9. Форма -#}
+{{ leadSection() }}

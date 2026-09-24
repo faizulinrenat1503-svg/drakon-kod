@@ -1,0 +1,36 @@
+<header class="header" id="siteHeader">
+  <div class="container header__inner">
+    <a class="logo" href="/" aria-label="Дракон.Код — на главную">{% include "components/logo.njk" %}</a>
+
+    <nav class="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        {%- for item in site.nav %}
+        <li><a class="nav__link" href="{{ item.url }}"{% if item.url | isActive(page.url) %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <a class="btn btn--outline header__cta" href="#zayavka" data-lead>Оставить заявку</a>
+
+    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileNav" id="navToggle">
+      {% icon "menu-2", "icon--open" %}{% icon "x", "icon--close" %}
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <nav aria-label="Мобильное меню">
+      <ul class="mobile-nav__list">
+        {%- for item in site.nav %}
+        <li><a href="{{ item.url }}"{% if item.url | isActive(page.url) %} aria-current="page"{% endif %}>{{ item.title }}{% icon "chevron-right" %}</a></li>
+        {%- endfor %}
+        <li><a href="/kontakty/"{% if "/kontakty/" | isActive(page.url) %} aria-current="page"{% endif %}>Контакты{% icon "chevron-right" %}</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary btn--block mobile-nav__cta" href="#zayavka" data-lead>Оставить заявку {% icon "arrow-right", "icon--arrow" %}</a>
+    <div class="mobile-nav__contacts">
+      <span>{{ site.contacts.phone | stub | safe }}</span>
+      <span>{{ site.contacts.email | stub | safe }}</span>
+      <span>{{ site.contacts.hours | stub | safe }}</span>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+{
+  "_README": "Коэффициенты калькулятора. ВСЕ ЧИСЛА — ЗАГЛУШКИ [ЗАПОЛНИТЬ]. Формула: итог = база группы + артикулы × perSku + единицы × perUnit (+ единицы × chinaPerUnit, если включена маркировка в Китае), но не меньше min. Пока showNumbers = false, на сайте вместо суммы выводится «от [N] ₽». Когда впишете настоящие коэффициенты — поставьте showNumbers: true.",
+  "showNumbers": false,
+  "min": 1000,
+  "perSku": 100,
+  "perUnit": 1,
+  "chinaPerUnit": 5,
+  "groupBase": {
+    "odezhda": 1000,
+    "igrushki": 1000,
+    "obuv": 1000,
+    "kosmetika": 1000,
+    "bytovaya-tehnika": 1000,
+    "tovary-dlya-doma": 1000,
+    "other": 1000
+  }
+}

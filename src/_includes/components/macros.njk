@@ -1,0 +1,171 @@
+{#- Общие компоненты. Подключение: {% from "components/macros.njk" import leadForm, groupCard with context %} -#}
+
+{#- Телефон / почта: ссылка, если данные заполнены, иначе заглушка -#}
+{% macro phoneLink() -%}
+  {%- if site.contacts.phoneHref -%}<a href="tel:{{ site.contacts.phoneHref }}">{{ site.contacts.phone }}</a>{%- else -%}{{ site.contacts.phone | stub | safe }}{%- endif -%}
+{%- endmacro %}
+{% macro emailLink() -%}
+  {%- if "[" in site.contacts.email -%}{{ site.contacts.email | stub | safe }}{%- else -%}<a href="mailto:{{ site.contacts.email }}">{{ site.contacts.email }}</a>{%- endif -%}
+{%- endmacro %}
+
+{#- Кнопка, открывающая форму заявки. Без JS ведёт к блоку формы #zayavka. -#}
+{% macro leadButton(text, style="primary", group="", comment="", extraClass="") -%}
+<a class="btn btn--{{ style }} {{ extraClass }}" href="#zayavka" data-lead{% if group %} data-lead-group="{{ group }}"{% endif %}{% if comment %} data-lead-comment="{{ comment }}"{% endif %}>{{ text }}{% if style == "primary" %} {% icon "arrow-right", "icon--arrow" %}{% endif %}</a>
+{%- endmacro %}
+
+{#- Форма заявки. id — уникальный префикс, group — slug подставляемой товарной группы -#}
+{% macro leadForm(id, group="", submitText="Отправить заявку") %}
+<div class="lead-box">
+  <form class="lead-form" data-lead-form action="{{ site.form.endpoint }}" method="post" novalidate>
+    <div class="lead-form__row">
+      <div class="field">
+        <label class="field__label" for="{{ id }}-name">Имя</label>
+        <input class="input" id="{{ id }}-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required aria-describedby="{{ id }}-name-err">
+        <p class="field__error" id="{{ id }}-name-err"></p>
+      </div>
+      <div class="field">
+        <label class="field__label" for="{{ id }}-phone">Телефон</label>
+        <input class="input" id="{{ id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required aria-describedby="{{ id }}-phone-err">
+        <p class="field__error" id="{{ id }}-phone-err"></p>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field__label" for="{{ id }}-group">Товарная группа</label>
+      <select class="select" id="{{ id }}-group" name="product_group" required aria-describedby="{{ id }}-group-err">
+        <option value="">Выберите группу</option>
+        {%- for g in groups %}
+        <option value="{{ g.name }}" data-slug="{{ g.slug }}"{% if g.slug == group %} selected{% endif %}>{{ g.name }}</option>
+        {%- endfor %}
+        <option value="Другое" data-slug="other"{% if group == "other" %} selected{% endif %}>Другое</option>
+      </select>
+      <p class="field__error" id="{{ id }}-group-err"></p>
+    </div>
+    <div class="field">
+      <label class="field__label" for="{{ id }}-comment">Комментарий <span class="muted">(необязательно)</span></label>
+      <textarea class="textarea" id="{{ id }}-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
+    </div>
+    <div class="hp" aria-hidden="true">
+      <label for="{{ id }}-website">Не заполняйте это поле</label>
+      <input id="{{ id }}-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+    <div class="field">
+      <label class="check">
+        <input type="checkbox" name="consent" value="1" required aria-describedby="{{ id }}-consent-err">
+        <span class="check__box">{% icon "check" %}</span>
+        <span>Согласен на <a href="/politika-konfidencialnosti/" target="_blank">обработку персональных данных</a></span>
+      </label>
+      <p class="field__error" id="{{ id }}-consent-err"></p>
+    </div>
+    <button class="btn btn--primary btn--block" type="submit">{{ submitText }} {% icon "arrow-right", "icon--arrow" %}</button>
+    <div class="lead-form__status" role="status" aria-live="polite"></div>
+  </form>
+  <div class="lead-success" tabindex="-1">
+    <span class="lead-success__icon">{% icon "check" %}</span>
+    <p class="lead-success__title">Спасибо!</p>
+    <p class="lead-success__text">Мы свяжемся с вами в ближайшее время.</p>
+  </div>
+</div>
+{% endmacro %}
+
+{#- Блок «Оставьте заявку» с формой (якорь #zayavka) -#}
+{% macro leadSection(title="Оставьте заявку", text="Поможем с маркировкой вашего товара. Рассчитаем стоимость и ответим на все вопросы.", group="", submitText="Отправить заявку") %}
+<section class="section section--tight" id="zayavka" aria-labelledby="zayavka-title">
+  <div class="container">
+    <div class="panel lead-section scales scales--left reveal">
+      <div class="lead-section__grid">
+        <div>
+          <h2 class="lead-section__title" id="zayavka-title">{{ title }}</h2>
+          <p class="lead-section__text">{{ text }}</p>
+          <ul class="lead-section__contacts">
+            <li>{% icon "phone" %}{{ phoneLink() }}</li>
+            <li>{% icon "mail" %}{{ emailLink() }}</li>
+            <li>{% icon "clock" %}{{ site.contacts.hours | stub | safe }}</li>
+          </ul>
+        </div>
+        {{ leadForm("inline", group, submitText) }}
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{#- Карточка товарной группы -#}
+{% macro groupCard(g, compact=false) %}
+<a class="card group-card{% if g.badge and g.badge.tone == 'warn' %} group-card--warn{% endif %}" href="/tovarnye-gruppy/{{ g.slug }}/">
+  <span class="group-card__icon">{% icon g.icon %}</span>
+  <span class="group-card__head">
+    <span class="group-card__title">{{ g.name }}</span>
+    {%- if g.badge %}<span class="badge badge--{{ g.badge.tone }}">{{ g.badge.text }}</span>{% endif %}
+  </span>
+  <span class="group-card__arrow">{% icon "arrow-right" %}</span>
+  {%- if not compact %}
+  <span class="group-card__text">{{ g.short | stub | safe }}</span>
+  {%- endif %}
+  {%- if g.cardNote %}
+  <span class="group-card__note">{{ g.cardNote | stub | safe }}</span>
+  {%- endif %}
+</a>
+{% endmacro %}
+
+{#- 4 шага работы (услуги). linked=false — без ссылок -#}
+{% macro serviceSteps(linked=true) %}
+<ol class="steps">
+  {%- for s in services %}
+  <li class="reveal" style="position:relative">
+    {%- if linked %}<a class="card step" href="/uslugi/{{ s.slug }}/">{% else %}<div class="card step">{% endif %}
+      <span class="step__num" aria-hidden="true">{{ s.num }}</span>
+      <span class="step__head">{% icon s.icon %}<span class="step__title">{{ s.title }}</span></span>
+      <span class="step__text">{{ s.short }}</span>
+      {%- if linked %}<span class="step__more">Подробнее {% icon "arrow-right" %}</span>{% endif %}
+    {%- if linked %}</a>{% else %}</div>{% endif %}
+    {%- if not loop.last %}<span class="step__arrow" aria-hidden="true">{% icon "arrow-right" %}</span>{% endif %}
+  </li>
+  {%- endfor %}
+</ol>
+{% endmacro %}
+
+{#- Список вопросов-ответов (details/summary) -#}
+{% macro faqList(items) %}
+<div class="faq">
+  {%- for item in items %}
+  <details class="faq__item"{% if loop.first %} open{% endif %}>
+    <summary class="faq__q">{{ item.q }}{% icon "plus" %}</summary>
+    <div class="faq__a"><p>{{ item.a | stub | safe }}</p></div>
+  </details>
+  {%- endfor %}
+</div>
+{% endmacro %}
+
+{#- Разметка schema.org FAQPage (заглушки из ответов вырезаются) -#}
+{% macro faqSchema(items) %}
+{%- set entities = [] -%}
+{%- for item in items -%}
+  {%- set _ = entities.push({ "@type": "Question", "name": item.q, "acceptedAnswer": { "@type": "Answer", "text": item.a | stripStubs } }) -%}
+{%- endfor -%}
+<script type="application/ld+json">{{ { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": entities } | json | safe }}</script>
+{% endmacro %}
+
+{#- Хлебные крошки + BreadcrumbList. items: [{title, url}], последний — текущая страница -#}
+{% macro breadcrumbs(items) %}
+<nav class="breadcrumbs container" aria-label="Хлебные крошки">
+  <ol>
+    <li><a href="/">Главная</a></li>
+    {%- for item in items %}
+    <li>{% if loop.last %}<span aria-current="page">{{ item.title }}</span>{% else %}<a href="{{ item.url }}">{{ item.title }}</a>{% endif %}</li>
+    {%- endfor %}
+  </ol>
+</nav>
+{%- set list = [{ "@type": "ListItem", "position": 1, "name": "Главная", "item": site.url + "/" }] -%}
+{%- for item in items -%}
+  {%- set _ = list.push({ "@type": "ListItem", "position": loop.index + 1, "name": item.title, "item": site.url + item.url }) -%}
+{%- endfor %}
+<script type="application/ld+json">{{ { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": list } | json | safe }}</script>
+{% endmacro %}
+
+{#- Плашка-уведомление товарной группы -#}
+{% macro alert(a) %}
+<div class="alert alert--{{ a.tone }}" role="note">
+  {% if a.tone == "warn" %}{% icon "alert-circle" %}{% else %}{% icon "info-circle" %}{% endif %}
+  <p>{{ a.text | stub | safe }}</p>
+</div>
+{% endmacro %}

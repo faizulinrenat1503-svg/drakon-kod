@@ -1,0 +1,37 @@
+{% from "components/macros.njk" import phoneLink, emailLink with context %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="/" aria-label="Дракон.Код — на главную">{% include "components/logo.njk" %}</a>
+        <p class="footer__about">Центр маркировки товаров для селлеров маркетплейсов и импортёров из Китая. Работаем в группе компаний с логистической компанией Дракон Трейд.</p>
+      </div>
+      <nav aria-label="Меню в подвале">
+        <p class="footer__title">Разделы</p>
+        <ul class="footer__nav">
+          {%- for item in site.footerNav %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      <div>
+        <p class="footer__title">Контакты</p>
+        <ul class="footer__contacts">
+          <li>{% icon "phone" %}{{ phoneLink() }}</li>
+          <li>{% icon "mail" %}{{ emailLink() }}</li>
+          <li>{% icon "clock" %}{{ site.contacts.hours | stub | safe }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>{{ (site.legal.company + " · ИНН " + site.legal.inn + " · ОГРН " + site.legal.ogrn + " · " + site.legal.address) | stub | safe }}</p>
+      <p class="footer__disclaimer">Не является официальным сайтом оператора системы «Честный знак».</p>
+      <div class="footer__legal-links">
+        <a href="/politika-konfidencialnosti/">Политика обработки персональных данных</a>
+        <a href="/oferta/">Договор-оферта</a>
+      </div>
+      <p>© {{ build.year }} Дракон.Код</p>
+    </div>
+  </div>
+</footer>
