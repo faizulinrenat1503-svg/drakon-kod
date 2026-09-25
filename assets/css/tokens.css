@@ -1,0 +1,61 @@
+/* Дизайн-токены «Дракон.Код». Все цвета, шрифты и радиусы — только здесь. */
+:root {
+  /* Фон и поверхности */
+  --c-bg: #16202A;
+  --c-bg-deep: #121B24;
+  --c-card: #1F2B36;
+  --c-card-hover: #243240;
+  --c-field: #18232D;
+  --c-border: rgba(255, 255, 255, 0.10);
+  --c-border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Текст */
+  --c-text: #F4F7F6;
+  --c-muted: #B7C2BD;
+
+  /* Акцент — мятный */
+  --c-accent: #2EF2C3;
+  --c-accent-hover: #5CF5D1;
+  --c-on-accent: #04110C;
+  --c-accent-soft: rgba(46, 242, 195, 0.12);
+  --c-accent-line: rgba(46, 242, 195, 0.35);
+  --c-scale: rgba(46, 242, 195, 0.16); /* линии узора «чешуя» */
+
+  /* Второй акцент — янтарный, только для предупреждений */
+  --c-warn: #FFB547;
+  --c-on-warn: #1A1204;
+  --c-warn-soft: rgba(255, 181, 71, 0.12);
+
+  /* Ошибки формы */
+  --c-error: #FF8A7A;
+
+  /* Этикетка на первом экране */
+  --c-label: #F7F9F8;
+  --c-label-ink: #0B1117;
+
+  /* Шрифты */
+  --f-head: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Радиусы */
+  --r-card: 18px;
+  --r-card-lg: 20px;
+  --r-btn: 12px;
+  --r-field: 12px;
+
+  /* Сетка */
+  --container: 1240px;
+  --gutter: 16px;
+  --header-h: 64px;
+
+  /* Движение */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 24px; }
+}
+@media (min-width: 1024px) {
+  :root { --gutter: 32px; --header-h: 76px; }
+}

@@ -1,0 +1,15 @@
+node_modules/
+_site/
+_backend/
+
+# Пароли обработчика формы — только на сервере
+backend/config.php
+backend/errors-log.php
+
+.DS_Store
+Thumbs.db
+Референс/
+
+# Служебные файлы Netlify
+.netlify/
+_preview/
