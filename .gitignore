@@ -9,3 +9,6 @@ backend/errors-log.php
 .DS_Store
 Thumbs.db
 Референс/
+
+# Служебные файлы Netlify
+.netlify/
