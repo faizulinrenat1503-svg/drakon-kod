@@ -10,7 +10,7 @@ eleventyComputed:
   title: "Маркировка {{ g.nameGenitive }} для маркетплейсов"
   description: "Маркировка {{ g.nameGenitive }} в системе «Честный знак» для селлеров Wildberries, Ozon, Яндекс Маркета: подключение, карточки, коды и этикетки, ввод в оборот. Маркировка в Китае до отправки."
 ---
-{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, serviceSteps, faqList, faqSchema, checkList, otherGroups, sectionHead, alert with context -%}
+{%- from "components/macros.njk" import calcLink, breadcrumbs, leadButton, leadSection, serviceSteps, faqList, faqSchema, checkList, otherGroups, sectionHead, alert with context -%}
 {%- set price = g.price or groupCommon.price -%}
 {%- set term = g.term or groupCommon.term -%}
 {%- set checklist = g.checklist or groupCommon.checklist -%}
@@ -23,7 +23,7 @@ eleventyComputed:
       <h1 class="page-hero__title" id="page-title">Маркировка <span class="hl">{{ g.nameGenitive }}</span> для маркетплейсов</h1>
       <p class="page-hero__lead">{{ g.lead | stub | safe }}</p>
       <div class="page-hero__actions">
-        {{ leadButton("Рассчитать стоимость", "primary", g.slug, "Хочу рассчитать стоимость маркировки: " + g.name) }}
+        {{ calcLink("primary", g.slug) }}
         {{ leadButton("Связаться с нами", "outline", g.slug) }}
       </div>
     </div>

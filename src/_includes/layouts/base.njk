@@ -12,6 +12,9 @@
   <link rel="canonical" href="{{ canonical }}">
   {%- if noindex or site.preview %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <meta name="theme-color" content="#16202A">
+  {%- if site.yandexVerification %}
+  <meta name="yandex-verification" content="{{ site.yandexVerification }}">
+  {%- endif %}
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.brand }}">
@@ -57,12 +60,24 @@
     </div>
   </dialog>
 
+  {#- Плашка про cookie — только если подключена Метрика (на предпросмотре — для показа, без счётчика) -#}
+  {%- if site.metrika.id or site.preview %}
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie" hidden>
+    <p class="cookie-banner__text">Мы используем файлы cookie и Яндекс Метрику, чтобы понимать, как работает сайт. Подробнее — в <a href="/politika-konfidencialnosti/">политике обработки персональных данных</a>.</p>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--outline" type="button" data-cookie="necessary">Только необходимые</button>
+      <button class="btn btn--primary" type="button" data-cookie="all">Принять всё</button>
+    </div>
+  </div>
+  {%- endif %}
+
   <script>
     window.DK_CONFIG = {{ {
       endpoint: site.form.endpoint,
       mock: eleventy.env.runMode == "serve",
       phone: site.contacts.phone,
-      phoneHref: site.contacts.phoneHref
+      phoneHref: site.contacts.phoneHref,
+      metrikaId: (site.metrika.id if not site.preview else "")
     } | json | safe }};
   </script>
   <script src="/assets/js/main.js" defer></script>

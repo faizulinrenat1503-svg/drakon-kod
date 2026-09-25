@@ -10,7 +10,7 @@ eleventyComputed:
   title: "{{ s.h1 }}"
   description: "{{ s.description }}"
 ---
-{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
+{%- from "components/macros.njk" import calcLink, breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
 
 {{ breadcrumbs([{ title: "Услуги", url: "/uslugi/" }, { title: s.pageTitle, url: page.url }]) }}
 
@@ -22,7 +22,7 @@ eleventyComputed:
       <p class="page-hero__lead">{{ s.lead | stub | safe }}</p>
       <div class="page-hero__actions">
         {{ leadButton("Оставить заявку", "primary", "", "Интересует услуга: " + s.pageTitle) }}
-        {{ leadButton("Рассчитать стоимость", "outline", "", "Хочу рассчитать стоимость: " + s.pageTitle) }}
+        {{ calcLink("outline") }}
       </div>
     </div>
     <aside class="panel facts" aria-label="Коротко">

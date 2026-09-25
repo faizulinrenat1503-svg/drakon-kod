@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: "Маркировка товаров в Китае до отправки в Россию"
 description: "Наносим коды маркировки на товар на складе в Китае: партия приезжает промаркированной и готовой к поставке на Wildberries, Ozon, Яндекс Маркет. Для импортёров."
 ---
-{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
+{%- from "components/macros.njk" import calcLink, breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
 
 {{ breadcrumbs([{ title: "Маркировка в Китае", url: page.url }]) }}
 
@@ -15,7 +15,7 @@ description: "Наносим коды маркировки на товар на 
       <p class="page-hero__lead">Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
       <div class="page-hero__actions">
         {{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку в Китае") }}
-        {{ leadButton("Рассчитать стоимость", "outline", "", "Хочу рассчитать стоимость маркировки в Китае") }}
+        {{ calcLink("outline", "", true) }}
       </div>
     </div>
     <ol class="china-steps china-steps--stack" aria-label="Коротко о процессе">

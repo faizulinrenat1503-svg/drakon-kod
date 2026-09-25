@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: "Услуги по маркировке товаров"
 description: "Подключение к системе «Честный знак», карточки товаров, коды и этикетки, ввод в оборот и маркировка в Китае — для селлеров Wildberries, Ozon, Яндекс Маркета."
 ---
-{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, serviceSteps with context -%}
+{%- from "components/macros.njk" import calcLink, breadcrumbs, leadButton, leadSection, serviceSteps with context -%}
 
 {{ breadcrumbs([{ title: "Услуги", url: page.url }]) }}
 
@@ -12,8 +12,8 @@ description: "Подключение к системе «Честный знак
     <h1 class="page-hero__title" id="page-title">Услуги: от подключения <span class="hl">до поставки</span></h1>
     <p class="page-hero__lead">Вам не нужно разбираться в системе. Вы присылаете данные о товаре — мы возвращаем готовые коды и этикетки. Можно заказать один этап или всё под ключ.</p>
     <div class="page-hero__actions">
-      {{ leadButton("Рассчитать стоимость", "primary", "", "Хочу рассчитать стоимость маркировки") }}
-      <a class="btn btn--outline" href="/ceny/">Смотреть цены</a>
+      {{ calcLink("primary") }}
+      {{ leadButton("Связаться с нами", "outline") }}
     </div>
   </div>
 </section>

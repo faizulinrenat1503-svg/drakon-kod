@@ -20,12 +20,12 @@
     <div class="lead-form__row">
       <div class="field">
         <label class="field__label" for="{{ id }}-name">Имя</label>
-        <input class="input" id="{{ id }}-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required aria-describedby="{{ id }}-name-err">
+        <input class="input ym-disable-keys" id="{{ id }}-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required aria-describedby="{{ id }}-name-err">
         <p class="field__error" id="{{ id }}-name-err"></p>
       </div>
       <div class="field">
         <label class="field__label" for="{{ id }}-phone">Телефон</label>
-        <input class="input" id="{{ id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required aria-describedby="{{ id }}-phone-err">
+        <input class="input ym-disable-keys" id="{{ id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required aria-describedby="{{ id }}-phone-err">
         <p class="field__error" id="{{ id }}-phone-err"></p>
       </div>
     </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="field">
       <label class="field__label" for="{{ id }}-comment">Комментарий <span class="muted">(необязательно)</span></label>
-      <textarea class="textarea" id="{{ id }}-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
+      <textarea class="textarea ym-disable-keys" id="{{ id }}-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
     </div>
     <div class="hp" aria-hidden="true">
       <label for="{{ id }}-website">Не заполняйте это поле</label>
@@ -209,3 +209,8 @@
   {%- if linkText %}<a class="link-arrow" href="{{ linkUrl }}"><span>{{ linkText }}</span>{% icon "arrow-right" %}</a>{% endif %}
 </div>
 {% endmacro %}
+
+{#- «Рассчитать стоимость» → калькулятор на странице цен (группа и Китай подставляются) -#}
+{% macro calcLink(style="primary", group="", china=false) -%}
+<a class="btn btn--{{ style }}" href="/ceny/{% if group or china %}?{% if group %}group={{ group }}{% endif %}{% if group and china %}&amp;{% endif %}{% if china %}china=1{% endif %}{% endif %}#kalkulyator">Рассчитать стоимость{% if style == "primary" %} {% icon "arrow-right", "icon--arrow" %}{% endif %}</a>
+{%- endmacro %}

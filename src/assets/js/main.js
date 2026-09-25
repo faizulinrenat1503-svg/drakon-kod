@@ -3,6 +3,11 @@
   "use strict";
 
   var CFG = window.DK_CONFIG || {};
+
+  // Цель Яндекс Метрики (срабатывает, только если посетитель разрешил Метрику)
+  function goal(name) {
+    if (window.ym && CFG.metrikaId) window.ym(Number(CFG.metrikaId), "reachGoal", name);
+  }
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Шапка и мобильное меню ---------- */
@@ -185,6 +190,7 @@
           if (!res || !res.success) throw new Error((res && res.error) || "send failed");
           form.reset();
           box.classList.add("is-sent");
+          goal("lead_sent");
           var ok = box.querySelector(".lead-success");
           if (ok) ok.focus();
         })
@@ -219,11 +225,18 @@
       sumEl.textContent = "от " + Math.round(total).toLocaleString("ru-RU") + " ₽";
     }
 
+    // Ссылка вида /ceny/?group=igrushki&china=1#kalkulyator — подставляем выбор
+    var params = new URLSearchParams(window.location.search);
+    var presetGroup = params.get("group");
+    if (presetGroup && el.group.querySelector('option[value="' + presetGroup + '"]')) el.group.value = presetGroup;
+    if (params.get("china") === "1") el.china.checked = true;
+
     calc.addEventListener("input", update);
     calc.addEventListener("change", update);
     update();
 
     calc.querySelector("[data-calc-submit]").addEventListener("click", function () {
+      goal("calc_request");
       var groupOpt = el.group.options[el.group.selectedIndex];
       var parts = [
         "Расчёт из калькулятора:",
@@ -242,4 +255,36 @@
       }
     });
   });
+
+  /* ---------- Cookie и Яндекс Метрика (как на dragon-trade) ----------
+     Счётчик загружается только после «Принять всё». Выбор хранится
+     в браузере посетителя; если хранилище недоступно — спросим снова. */
+  var COOKIE_KEY = "dk_cookie_consent"; // "all" | "necessary"
+
+  function loadMetrika() {
+    if (!CFG.metrikaId || window.ym) return;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    window.ym(Number(CFG.metrikaId), "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  }
+
+  var banner = document.getElementById("cookieBanner");
+  var consent = null;
+  try { consent = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+  if (consent === "all") loadMetrika();
+  if (banner && consent !== "all" && consent !== "necessary") {
+    banner.hidden = false;
+    document.body.classList.add("has-cookie-banner");
+    banner.addEventListener("click", function (e) {
+      var choice = e.target.getAttribute("data-cookie");
+      if (!choice) return;
+      try { localStorage.setItem(COOKIE_KEY, choice); } catch (err) {}
+      banner.hidden = true;
+      document.body.classList.remove("has-cookie-banner");
+      if (choice === "all") loadMetrika();
+    });
+  }
 })();
