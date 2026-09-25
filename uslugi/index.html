@@ -92,8 +92,8 @@
     <h1 class="page-hero__title" id="page-title">Услуги: от подключения <span class="hl">до поставки</span></h1>
     <p class="page-hero__lead">Вам не нужно разбираться в системе. Вы присылаете данные о товаре — мы возвращаем готовые коды и этикетки. Можно заказать один этап или всё под ключ.</p>
     <div class="page-hero__actions">
-      <a class="btn btn--primary " href="#zayavka" data-lead="" data-lead-comment="Хочу рассчитать стоимость маркировки">Рассчитать стоимость <svg class="icon icon--arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></a>
-      <a class="btn btn--outline" href="/drakon-kod/ceny/">Смотреть цены</a>
+      <a class="btn btn--primary" href="/drakon-kod/ceny/#kalkulyator">Рассчитать стоимость <svg class="icon icon--arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></a>
+      <a class="btn btn--outline " href="#zayavka" data-lead="">Связаться с нами</a>
     </div>
   </div>
 </section>
@@ -182,12 +182,12 @@
     <div class="lead-form__row">
       <div class="field">
         <label class="field__label" for="inline-name">Имя</label>
-        <input class="input" id="inline-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="inline-name-err">
+        <input class="input ym-disable-keys" id="inline-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="inline-name-err">
         <p class="field__error" id="inline-name-err"></p>
       </div>
       <div class="field">
         <label class="field__label" for="inline-phone">Телефон</label>
-        <input class="input" id="inline-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="inline-phone-err">
+        <input class="input ym-disable-keys" id="inline-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="inline-phone-err">
         <p class="field__error" id="inline-phone-err"></p>
       </div>
     </div>
@@ -207,7 +207,7 @@
     </div>
     <div class="field">
       <label class="field__label" for="inline-comment">Комментарий <span class="muted">(необязательно)</span></label>
-      <textarea class="textarea" id="inline-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
+      <textarea class="textarea ym-disable-keys" id="inline-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
     </div>
     <div class="hp" aria-hidden="true">
       <label for="inline-website">Не заполняйте это поле</label>
@@ -307,12 +307,12 @@
     <div class="lead-form__row">
       <div class="field">
         <label class="field__label" for="modal-name">Имя</label>
-        <input class="input" id="modal-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="modal-name-err">
+        <input class="input ym-disable-keys" id="modal-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="modal-name-err">
         <p class="field__error" id="modal-name-err"></p>
       </div>
       <div class="field">
         <label class="field__label" for="modal-phone">Телефон</label>
-        <input class="input" id="modal-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="modal-phone-err">
+        <input class="input ym-disable-keys" id="modal-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="modal-phone-err">
         <p class="field__error" id="modal-phone-err"></p>
       </div>
     </div>
@@ -332,7 +332,7 @@
     </div>
     <div class="field">
       <label class="field__label" for="modal-comment">Комментарий <span class="muted">(необязательно)</span></label>
-      <textarea class="textarea" id="modal-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
+      <textarea class="textarea ym-disable-keys" id="modal-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
     </div>
     <div class="hp" aria-hidden="true">
       <label for="modal-website">Не заполняйте это поле</label>
@@ -359,9 +359,16 @@
 
     </div>
   </dialog>
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie" hidden="">
+    <p class="cookie-banner__text">Мы используем файлы cookie и Яндекс Метрику, чтобы понимать, как работает сайт. Подробнее — в <a href="/drakon-kod/politika-konfidencialnosti/">политике обработки персональных данных</a>.</p>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--outline" type="button" data-cookie="necessary">Только необходимые</button>
+      <button class="btn btn--primary" type="button" data-cookie="all">Принять всё</button>
+    </div>
+  </div>
 
   <script>
-    window.DK_CONFIG = {"endpoint":"https://form.[ЗАПОЛНИТЬ-домен]/submit.php","mock":false,"phone":"[ЗАПОЛНИТЬ: телефон]","phoneHref":""};
+    window.DK_CONFIG = {"endpoint":"https://form.[ЗАПОЛНИТЬ-домен]/submit.php","mock":false,"phone":"[ЗАПОЛНИТЬ: телефон]","phoneHref":"","metrikaId":""};
   </script>
   <script src="/drakon-kod/assets/js/main.js" defer=""></script>
 </body>

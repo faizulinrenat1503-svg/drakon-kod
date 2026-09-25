@@ -177,12 +177,12 @@
     <div class="lead-form__row">
       <div class="field">
         <label class="field__label" for="modal-name">Имя</label>
-        <input class="input" id="modal-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="modal-name-err">
+        <input class="input ym-disable-keys" id="modal-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="200" required="" aria-describedby="modal-name-err">
         <p class="field__error" id="modal-name-err"></p>
       </div>
       <div class="field">
         <label class="field__label" for="modal-phone">Телефон</label>
-        <input class="input" id="modal-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="modal-phone-err">
+        <input class="input ym-disable-keys" id="modal-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30" required="" aria-describedby="modal-phone-err">
         <p class="field__error" id="modal-phone-err"></p>
       </div>
     </div>
@@ -202,7 +202,7 @@
     </div>
     <div class="field">
       <label class="field__label" for="modal-comment">Комментарий <span class="muted">(необязательно)</span></label>
-      <textarea class="textarea" id="modal-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
+      <textarea class="textarea ym-disable-keys" id="modal-comment" name="comment" rows="3" maxlength="2000" placeholder="Что за товар, сколько артикулов, откуда везёте"></textarea>
     </div>
     <div class="hp" aria-hidden="true">
       <label for="modal-website">Не заполняйте это поле</label>
@@ -229,9 +229,16 @@
 
     </div>
   </dialog>
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie" hidden="">
+    <p class="cookie-banner__text">Мы используем файлы cookie и Яндекс Метрику, чтобы понимать, как работает сайт. Подробнее — в <a href="/drakon-kod/politika-konfidencialnosti/">политике обработки персональных данных</a>.</p>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--outline" type="button" data-cookie="necessary">Только необходимые</button>
+      <button class="btn btn--primary" type="button" data-cookie="all">Принять всё</button>
+    </div>
+  </div>
 
   <script>
-    window.DK_CONFIG = {"endpoint":"https://form.[ЗАПОЛНИТЬ-домен]/submit.php","mock":false,"phone":"[ЗАПОЛНИТЬ: телефон]","phoneHref":""};
+    window.DK_CONFIG = {"endpoint":"https://form.[ЗАПОЛНИТЬ-домен]/submit.php","mock":false,"phone":"[ЗАПОЛНИТЬ: телефон]","phoneHref":"","metrikaId":""};
   </script>
   <script src="/drakon-kod/assets/js/main.js" defer=""></script>
 </body>
