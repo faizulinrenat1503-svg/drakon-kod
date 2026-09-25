@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: "Политика обработки персональных данных"
+description: "Политика обработки персональных данных сайта Дракон.Код."
+---
+{%- from "components/macros.njk" import breadcrumbs with context -%}
+
+{{ breadcrumbs([{ title: "Политика обработки персональных данных", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Политика обработки персональных данных</h1>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container prose">
+    <p>{{ "[ЗАПОЛНИТЬ: юридический текст]" | stub | safe }}</p>
+    <p>Оператор персональных данных: {{ (site.legal.company + ", ИНН " + site.legal.inn + ", ОГРН " + site.legal.ogrn + ", " + site.legal.address) | stub | safe }}.</p>
+  </div>
+</section>

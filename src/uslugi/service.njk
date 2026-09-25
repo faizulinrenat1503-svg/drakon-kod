@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: services
+  size: 1
+  alias: s
+  addAllPagesToCollections: true
+permalink: "/uslugi/{{ s.slug }}/"
+eleventyComputed:
+  title: "{{ s.h1 }}"
+  description: "{{ s.description }}"
+---
+{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
+
+{{ breadcrumbs([{ title: "Услуги", url: "/uslugi/" }, { title: s.pageTitle, url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__grid page-hero__grid--aside">
+    <div>
+      <p class="eyebrow">Услуга {{ s.num }}</p>
+      <h1 class="page-hero__title" id="page-title">{{ s.h1 }}</h1>
+      <p class="page-hero__lead">{{ s.lead | stub | safe }}</p>
+      <div class="page-hero__actions">
+        {{ leadButton("Оставить заявку", "primary", "", "Интересует услуга: " + s.pageTitle) }}
+        {{ leadButton("Рассчитать стоимость", "outline", "", "Хочу рассчитать стоимость: " + s.pageTitle) }}
+      </div>
+    </div>
+    <aside class="panel facts" aria-label="Коротко">
+      <p class="facts__title">Коротко</p>
+      <ul class="facts__list">
+        <li class="facts__item">{% icon "coin" %}<span class="facts__label">Цена</span><span class="facts__value">{{ s.price | stub | safe }}</span></li>
+        <li class="facts__item">{% icon "clock" %}<span class="facts__label">Срок</span><span class="facts__value">{{ s.term | stub | safe }}</span></li>
+        <li class="facts__item">{% icon "shopping-cart" %}<span class="facts__label">Работаем с</span><span class="facts__value facts__value--text">WB, Ozon, Яндекс Маркет</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="includes-title">
+  <div class="container">
+    {{ sectionHead("Что входит", "includes-title") }}
+    <ul class="includes">
+      {%- for item in s.includes %}
+      <li class="card include reveal">
+        <span class="include__num">0{{ loop.index }}</span>
+        <h3 class="include__title">{{ item.title }}</h3>
+        <p class="include__text">{{ item.text | stub | safe }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="need-title">
+  <div class="container two-col">
+    <div class="panel reveal">
+      <h2 class="two-col__title" id="need-title">Что нужно от вас</h2>
+      {{ checkList(s.fromClient) }}
+      {%- if s.note %}<p class="two-col__note">{{ s.note | stub | safe }}</p>{% endif %}
+    </div>
+    <div class="panel reveal">
+      <h2 class="two-col__title">Другие этапы</h2>
+      <ul class="notreq__list steps-nav">
+        {%- for other in services %}
+        <li>
+          {%- if other.slug == s.slug %}
+          <span class="mono hl">{{ other.num }}</span><span aria-current="page"><strong>{{ other.pageTitle }}</strong> — вы здесь</span>
+          {%- else %}
+          <span class="mono hl">{{ other.num }}</span><a href="/uslugi/{{ other.slug }}/">{{ other.pageTitle }}</a>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+        <li><span class="mono hl">CN</span><a href="/markirovka-v-kitae/">Маркировка в Китае</a></li>
+      </ul>
+      <p class="two-col__note">Можно заказать один этап или всё под ключ — от подключения до ввода в оборот.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="faq-title">
+  <div class="container">
+    {{ sectionHead("Вопросы", "faq-title", "Все вопросы", "/voprosy/") }}
+    <div class="reveal">{{ faqList(s.faq) }}</div>
+  </div>
+</section>
+{{ faqSchema(s.faq) }}
+
+{{ leadSection("Оставьте заявку", "Расскажите о товаре — рассчитаем стоимость и сроки.") }}

@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+title: "Страница не найдена"
+description: "Такой страницы нет на сайте Дракон.Код."
+noindex: true
+eleventyExcludeFromCollections: true
+---
+<section class="not-found scales" aria-labelledby="page-title">
+  <div class="container">
+    <p class="not-found__code" aria-hidden="true">404</p>
+    <h1 class="not-found__title" id="page-title">Такой страницы нет</h1>
+    <p class="not-found__text">Возможно, ссылка устарела или в адресе опечатка. Начните с главной или выберите товарную группу.</p>
+    <div class="not-found__actions">
+      <a class="btn btn--primary" href="/">На главную {% icon "arrow-right", "icon--arrow" %}</a>
+      <a class="btn btn--outline" href="/tovarnye-gruppy/">Товарные группы</a>
+    </div>
+  </div>
+</section>

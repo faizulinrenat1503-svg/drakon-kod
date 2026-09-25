@@ -1,0 +1,69 @@
+---
+layout: layouts/base.njk
+title: "Цены на маркировку товаров"
+description: "Стоимость маркировки для селлеров маркетплейсов: пакеты «Старт», «Поставка», «Импорт из Китая», калькулятор и прайс по операциям."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, checkList, sectionHead with context -%}
+
+{{ breadcrumbs([{ title: "Цены", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Цены на <span class="hl">маркировку</span></h1>
+    <p class="page-hero__lead">Выберите пакет или посчитайте стоимость в калькуляторе. Точную сумму назовёт менеджер после того, как посмотрит ваши товары.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Пакеты">
+  <div class="container">
+    <ul class="packages">
+      {%- for p in prices.packages %}
+      <li class="card package{% if p.featured %} package--featured{% endif %} reveal">
+        <div>
+          <h2 class="package__name">{{ p.name }}</h2>
+          <p class="package__for">{{ p.for }}</p>
+        </div>
+        <p class="package__price">{{ p.price | stub | safe }}{% if p.priceNote %}<span class="package__price-note">{{ p.priceNote }}</span>{% endif %}</p>
+        {{ checkList(p.includes) }}
+        {{ leadButton(p.cta, "primary" if p.featured else "outline", "", "Интересует пакет «" + p.name + "»", "btn--block") }}
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="calc-title">
+  <div class="container">
+    {{ sectionHead("Калькулятор", "calc-title") }}
+    {% include "components/calculator.njk" %}
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="table-title">
+  <div class="container">
+    {{ sectionHead("Прайс по операциям", "table-title") }}
+    <div class="price-table-wrap reveal">
+      <table class="price-table">
+        <thead><tr><th scope="col">Операция</th><th scope="col">Единица</th><th scope="col">Цена</th></tr></thead>
+        <tbody>
+          {%- for op in prices.operations %}
+          <tr><td>{{ op.name }}</td><td>{{ op.unit }}</td><td>{{ op.price | stub | safe }}</td></tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="mandatory-title">
+  <div class="container">
+    {{ sectionHead("Обязательные расходы клиента", "mandatory-title", "", "", "Эти расходы оплачиваются напрямую, отдельно от наших услуг. Мы подскажем точные суммы.") }}
+    <ul class="mandatory">
+      {%- for m in prices.mandatory %}
+      <li class="card reveal">{% icon m.icon %}<h3 class="card__title">{{ m.name }}</h3><p class="card__text">{{ m.text | stub | safe }}</p></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{{ leadSection("Получить точный расчёт", "Расскажите о товаре и объёмах — посчитаем стоимость и сроки.") }}

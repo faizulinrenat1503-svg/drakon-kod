@@ -1,0 +1,30 @@
+{#- Блок «Маркировка в Китае» (главная, услуги, группы). Тексты шагов — src/_data/china.json -#}
+{%- from "components/macros.njk" import leadButton with context -%}
+<section class="section section--tight" aria-labelledby="china-title">
+  <div class="container">
+    <div class="panel china scales scales--right reveal">
+      <div class="china__grid">
+        <div>
+          <h2 class="china__title" id="china-title">Маркировка в Китае — до отправки в Россию</h2>
+          <p class="china__text">Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
+          <div class="china__actions">
+            {{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку в Китае") }}
+            {%- if page.url != "/markirovka-v-kitae/" %}
+            <a class="link-arrow" href="/markirovka-v-kitae/"><span>Как это работает</span>{% icon "arrow-right" %}</a>
+            {%- endif %}
+          </div>
+        </div>
+        <ol class="china-steps">
+          {%- for st in china.steps %}
+          <li class="card china-step">
+            <span class="china-step__icon">{% icon st.icon %}</span>
+            <span class="china-step__num">0{{ loop.index }}</span>
+            <span class="china-step__text">{{ st.text }}</span>
+            {%- if not loop.last %}<span class="china-step__arrow" aria-hidden="true">{% icon "arrow-right" %}</span>{% endif %}
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

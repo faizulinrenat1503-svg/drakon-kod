@@ -169,3 +169,42 @@
   <p>{{ a.text | stub | safe }}</p>
 </div>
 {% endmacro %}
+
+{#- Список с галочками -#}
+{% macro checkList(items) %}
+<ul class="checklist">
+  {%- for item in items %}
+  <li><span class="checklist__icon">{% icon "check" %}</span><span>{{ item | stub | safe }}</span></li>
+  {%- endfor %}
+</ul>
+{% endmacro %}
+
+{#- «Другие товарные группы» — 4 карточки, кроме текущей -#}
+{% macro otherGroups(currentSlug) %}
+<section class="section section--tight" aria-labelledby="other-groups-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title" id="other-groups-title">Другие товарные группы</h2>
+      <a class="link-arrow" href="/tovarnye-gruppy/"><span>Все группы</span>{% icon "arrow-right" %}</a>
+    </div>
+    <ul class="groups groups--4">
+      {%- set shown = 0 -%}
+      {%- for g in groups -%}
+        {%- if g.slug != currentSlug and shown < 4 -%}
+        {%- set shown = shown + 1 %}
+      <li class="reveal">{{ groupCard(g, true) }}</li>
+        {%- endif -%}
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{% endmacro %}
+
+{#- Заголовок секции -#}
+{% macro sectionHead(title, id, linkText="", linkUrl="", lead="") %}
+<div class="section__head reveal">
+  <h2 class="section__title" id="{{ id }}">{{ title }}</h2>
+  {%- if lead %}<p class="section__lead">{{ lead | stub | safe }}</p>{% endif %}
+  {%- if linkText %}<a class="link-arrow" href="{{ linkUrl }}"><span>{{ linkText }}</span>{% icon "arrow-right" %}</a>{% endif %}
+</div>
+{% endmacro %}

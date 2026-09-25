@@ -51,6 +51,10 @@
 | Услуги (4 шага) | `src/_data/services.json` |
 | Вопросы и ответы | `src/_data/faq.json` |
 | Коэффициенты калькулятора | `src/_data/calculator.json` |
+| Цена и срок в карточке «Коротко», чек-лист «Что нужно от вас» на страницах групп | `src/_data/groupCommon.json` (или поле у группы в `groups.json`) |
+| Маркировка в Китае: шаги, этапы, выгоды, FAQ | `src/_data/china.json` |
+| Пакеты, прайс по операциям, обязательные расходы | `src/_data/prices.json` |
+| Новости | `src/novosti/*.md` |
 | Отзывы (сейчас скрыты) | `src/_data/reviews.json` + `features.reviews` в `site.js` |
 | Цвета, шрифты, радиусы | `src/assets/css/tokens.css` |
 | Логотип | `src/_includes/components/logo.njk` |
@@ -59,16 +63,44 @@
 Заглушки `[ЗАПОЛНИТЬ]` и `[ПРОВЕРИТЬ]` подсвечиваются на страницах янтарным, чтобы их было
 видно до запуска. Когда вписываете настоящий текст, просто удаляйте метку.
 
+## Как добавить новость
+
+Создайте файл `src/novosti/адрес-новости.md` (имя латиницей — это будет адрес страницы):
+
+```markdown
+---
+title: "Заголовок новости"
+excerpt: "Короткий анонс для списка новостей"
+description: "Описание для поисковиков"
+date: 2026-10-01
+group: igrushki   # slug товарной группы из groups.json (тег новости), можно не указывать
+---
+
+Текст новости в Markdown: абзацы, ## подзаголовки, списки.
+```
+
+Новость сама появится в списке `/novosti/` (новые сверху) и в `sitemap.xml`.
+
+## Страницы
+
+- Товарные группы (`/tovarnye-gruppy/<slug>/`) и услуги (`/uslugi/<slug>/`) генерируются из
+  `groups.json` и `services.json` — чтобы добавить группу или услугу, достаточно добавить запись в файл данных.
+- Остальные страницы — отдельные файлы в `src/`: `ceny.njk`, `voprosy.njk`, `markirovka-v-kitae.njk`,
+  `o-kompanii.njk`, `kontakty.njk`, `novosti.njk`, `politika-konfidencialnosti.njk`, `oferta.njk`, `404.njk`.
+- `404.html` нужно назначить страницей ошибки в настройках хостинга
+  (для Apache: `ErrorDocument 404 /404.html`).
+
 ## Структура
 
 ```
 src/
   _data/          данные и тексты (см. таблицу выше)
   _includes/
-    layouts/      base.njk — общий каркас страницы (head, SEO, шапка, подвал, модальное окно)
-    components/   header, footer, logo, macros (форма, карточки, FAQ, хлебные крошки), calculator, reviews
+    layouts/      base.njk — общий каркас страницы (head, SEO, шапка, подвал, модальное окно); news.njk — страница новости
+    components/   header, footer, logo, macros (форма, карточки, FAQ, хлебные крошки), calculator, china-block, reviews
   assets/         css, js, img
-  index.njk       главная
+  index.njk       главная; остальные страницы — рядом, группы и услуги — в tovarnye-gruppy/ и uslugi/
+  novosti/        новости в Markdown
   sitemap.njk, robots.njk
 backend/          submit.php, config.example.php
 scripts/          build-backend.js, stubs.js

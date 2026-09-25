@@ -80,6 +80,16 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("stripStubs", (str) =>
     String(str ?? "").replace(STUB_RE, "").replace(/\s{2,}/g, " ").trim()
   );
+  // Подсветка заглушек в уже готовом HTML (текст новостей из Markdown)
+  eleventyConfig.addFilter("stubHtml", (html) =>
+    String(html ?? "").replace(STUB_RE, (m) => `<span class="stub">${m}</span>`)
+  );
+  const MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+  eleventyConfig.addFilter("ruDate", (d) => {
+    const date = new Date(d);
+    return `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
+  });
+  eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
   eleventyConfig.addFilter("bySlug", (list, slug) => (list || []).find((i) => i.slug === slug));
 
   eleventyConfig.addWatchTarget("src/assets/");

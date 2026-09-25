@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: "Новости маркировки"
+description: "Новости маркировки товаров для селлеров маркетплейсов: новые товарные группы, сроки и изменения правил."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadSection with context -%}
+
+{{ breadcrumbs([{ title: "Новости", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Новости <span class="hl">маркировки</span></h1>
+    <p class="page-hero__lead">Новые товарные группы, сроки и изменения правил — коротко и по делу.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Список новостей">
+  <div class="container">
+    <ul class="news-list">
+      {%- for post in collections.news | reverse %}
+      {%- set g = groups | bySlug(post.data.group) %}
+      <li class="reveal">
+        <a class="card news-card" href="{{ post.url }}">
+          <span class="news-card__meta">
+            <time class="news-card__date" datetime="{{ post.date | isoDate }}">{{ post.date | ruDate }}</time>
+            {%- if g %}<span class="chip">{{ g.name }}</span>{% endif %}
+          </span>
+          <h2 class="news-card__title">{{ post.data.title | stub | safe }}</h2>
+          <p class="news-card__excerpt">{{ post.data.excerpt | stub | safe }}</p>
+          <span class="news-card__more">Читать {% icon "arrow-right" %}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{{ leadSection() }}

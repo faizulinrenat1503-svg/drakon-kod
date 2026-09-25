@@ -1,0 +1,101 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: groups
+  size: 1
+  alias: g
+  addAllPagesToCollections: true
+permalink: "/tovarnye-gruppy/{{ g.slug }}/"
+eleventyComputed:
+  title: "Маркировка {{ g.nameGenitive }} для маркетплейсов"
+  description: "Маркировка {{ g.nameGenitive }} в системе «Честный знак» для селлеров Wildberries, Ozon, Яндекс Маркета: подключение, карточки, коды и этикетки, ввод в оборот. Маркировка в Китае до отправки."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, serviceSteps, faqList, faqSchema, checkList, otherGroups, sectionHead, alert with context -%}
+{%- set price = g.price or groupCommon.price -%}
+{%- set term = g.term or groupCommon.term -%}
+{%- set checklist = g.checklist or groupCommon.checklist -%}
+
+{{ breadcrumbs([{ title: "Товарные группы", url: "/tovarnye-gruppy/" }, { title: g.name, url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__grid page-hero__grid--aside">
+    <div>
+      <h1 class="page-hero__title" id="page-title">Маркировка <span class="hl">{{ g.nameGenitive }}</span> для маркетплейсов</h1>
+      <p class="page-hero__lead">{{ g.lead | stub | safe }}</p>
+      <div class="page-hero__actions">
+        {{ leadButton("Рассчитать стоимость", "primary", g.slug, "Хочу рассчитать стоимость маркировки: " + g.name) }}
+        {{ leadButton("Связаться с нами", "outline", g.slug) }}
+      </div>
+    </div>
+    <aside class="panel facts" aria-label="Коротко">
+      <p class="facts__title">Коротко</p>
+      <ul class="facts__list">
+        <li class="facts__item">{% icon "coin" %}<span class="facts__label">Цена</span><span class="facts__value">{{ price | stub | safe }}</span></li>
+        <li class="facts__item">{% icon "clock" %}<span class="facts__label">Срок оформления</span><span class="facts__value">{{ term | stub | safe }}</span></li>
+        <li class="facts__item">{% icon "shopping-cart" %}<span class="facts__label">Работаем с</span><span class="facts__value facts__value--text">WB, Ozon, Яндекс Маркет</span></li>
+      </ul>
+    </aside>
+  </div>
+  {%- if g.alert %}
+  <div class="container page-alert">{{ alert(g.alert) }}</div>
+  {%- endif %}
+</section>
+
+<section class="section section--tight" aria-labelledby="subcats-title">
+  <div class="container">
+    {{ sectionHead("Какие товары нужно маркировать", "subcats-title") }}
+    {%- if g.subcategoriesIntro %}<p class="section__intro">{{ g.subcategoriesIntro | stub | safe }}</p>{% endif %}
+    <div class="subcats-layout">
+      <ul class="subcats">
+        {%- for s in g.subcategories %}
+        <li class="card subcat reveal">{% icon s.icon %}<p class="subcat__title">{{ s.title }}</p><p class="subcat__text">{{ s.text | stub | safe }}</p></li>
+        {%- endfor %}
+      </ul>
+      <div class="card notreq reveal">
+        <p class="notreq__title">Что маркировать не нужно</p>
+        <ul class="notreq__list">
+          {%- for item in g.notRequired %}
+          <li>{% icon "circle-minus" %}<span>{{ item | stub | safe }}</span></li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="steps-title">
+  <div class="container">
+    {{ sectionHead("Что мы делаем", "steps-title") }}
+    {{ serviceSteps(true) }}
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="need-title">
+  <div class="container two-col">
+    <div class="panel reveal">
+      <h2 class="two-col__title" id="need-title">Что нужно от вас</h2>
+      {{ checkList(checklist) }}
+      <p class="two-col__note">{{ groupCommon.checklistNote | stub | safe }}</p>
+    </div>
+    <div class="panel china-mini scales scales--right reveal">
+      <h2 class="two-col__title">Маркировка в Китае</h2>
+      <p>Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
+      <div class="china__actions">
+        {{ leadButton("Промаркировать в Китае", "primary", g.slug, "Хочу промаркировать товар в Китае: " + g.name) }}
+        <a class="link-arrow" href="/markirovka-v-kitae/"><span>Подробнее</span>{% icon "arrow-right" %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="faq-title">
+  <div class="container">
+    {{ sectionHead("Вопросы о маркировке " + g.nameGenitive, "faq-title", "Все вопросы", "/voprosy/") }}
+    <div class="reveal">{{ faqList(g.faq) }}</div>
+  </div>
+</section>
+{{ faqSchema(g.faq) }}
+
+{{ leadSection("Оставьте заявку", "Поможем с маркировкой " + g.nameGenitive + ". Рассчитаем стоимость и ответим на все вопросы.", g.slug) }}
+
+{{ otherGroups(g.slug) }}

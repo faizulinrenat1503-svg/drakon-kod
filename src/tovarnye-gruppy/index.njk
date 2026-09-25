@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: "Товарные группы: что нужно маркировать"
+description: "Какие товары нужно маркировать для продажи на Wildberries, Ozon, Яндекс Маркете: одежда, игрушки, обувь, косметика, бытовая техника, товары для дома."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, groupCard, alert with context -%}
+
+{{ breadcrumbs([{ title: "Товарные группы", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Нужна ли маркировка <span class="hl">вашему товару?</span></h1>
+    <p class="page-hero__lead">Выберите товарную группу — расскажем, что маркировать, что нужно от вас и как мы поможем. Не нашли свою группу? Напишите — проверим ваш товар.</p>
+    <div class="page-hero__actions">
+      {{ leadButton("Проверить мой товар", "primary", "", "Хочу проверить, нужна ли маркировка моему товару") }}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Список товарных групп">
+  <div class="container">
+    <ul class="groups">
+      {%- for g in groups %}
+      <li class="reveal">{{ groupCard(g) }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{%- set alerts = [] -%}
+{%- for g in groups -%}{%- if g.alert -%}{%- set _ = alerts.push(g) -%}{%- endif -%}{%- endfor -%}
+{%- if alerts.length %}
+<section class="section section--tight" aria-labelledby="dates-title">
+  <div class="container">
+    <div class="section__head reveal"><h2 class="section__title" id="dates-title">Важные сроки</h2></div>
+    <div class="faq">
+      {%- for g in alerts %}
+      <a class="reveal alert-link" href="/tovarnye-gruppy/{{ g.slug }}/">{{ alert({ tone: g.alert.tone, text: g.name + ": " + g.alert.text }) }}</a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{% include "components/china-block.njk" %}
+
+{{ leadSection("Не нашли свою группу?", "Пришлите список товаров — проверим, что нужно маркировать, и рассчитаем стоимость.", "other") }}

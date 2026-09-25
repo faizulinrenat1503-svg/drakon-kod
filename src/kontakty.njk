@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: "Контакты"
+description: "Контакты Дракон.Код: телефон, почта, режим работы. Оставьте заявку — рассчитаем стоимость маркировки и ответим на вопросы."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadSection, phoneLink, emailLink with context -%}
+
+{{ breadcrumbs([{ title: "Контакты", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Контакты</h1>
+    <p class="page-hero__lead">Позвоните, напишите или оставьте заявку — перезвоним, посчитаем стоимость и ответим на вопросы.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Способы связи">
+  <div class="container">
+    <ul class="contact-cards">
+      <li class="card contact-card reveal">{% icon "phone" %}<span class="contact-card__label">Телефон</span><span class="contact-card__value">{{ phoneLink() }}</span></li>
+      <li class="card contact-card reveal">{% icon "mail" %}<span class="contact-card__label">Почта</span><span class="contact-card__value">{{ emailLink() }}</span></li>
+      <li class="card contact-card reveal">{% icon "clock" %}<span class="contact-card__label">Режим работы</span><span class="contact-card__value">{{ site.contacts.hours | stub | safe }}</span></li>
+    </ul>
+  </div>
+</section>
+
+{{ leadSection("Оставьте заявку", "Расскажите о товаре — рассчитаем стоимость маркировки и сроки.") }}
+
+<section class="section section--tight" aria-labelledby="req-title">
+  <div class="container">
+    <div class="panel two-col-single reveal">
+      <h2 class="two-col__title" id="req-title">Реквизиты</h2>
+      <table class="requisites">
+        <tbody>
+          <tr><th scope="row">Организация</th><td>{{ site.legal.company | stub | safe }}</td></tr>
+          <tr><th scope="row">ИНН</th><td>{{ site.legal.inn | stub | safe }}</td></tr>
+          <tr><th scope="row">ОГРН</th><td>{{ site.legal.ogrn | stub | safe }}</td></tr>
+          <tr><th scope="row">Адрес</th><td>{{ site.legal.address | stub | safe }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

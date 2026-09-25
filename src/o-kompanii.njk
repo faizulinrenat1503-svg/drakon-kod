@@ -1,0 +1,72 @@
+---
+layout: layouts/base.njk
+title: "О компании"
+description: "Дракон.Код — центр маркировки товаров для селлеров маркетплейсов и импортёров из Китая. Работаем в группе компаний с логистической компанией Дракон Трейд."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadSection, sectionHead with context -%}
+
+{{ breadcrumbs([{ title: "О компании", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">О компании <span class="hl">Дракон.Код</span></h1>
+    <p class="page-hero__lead">Центр маркировки товаров в системе «Честный знак» для селлеров маркетплейсов, импортёров и производителей.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Кто мы">
+  <div class="container about-grid">
+    <div class="panel reveal">
+      <h2 class="two-col__title">Кто мы</h2>
+      <p>Мы берём на себя всю работу с системой маркировки: подключение, карточки товаров, коды и этикетки, ввод в оборот. Вы присылаете данные о товаре — мы возвращаем готовые коды и этикетки.</p>
+      <p>Работаем с селлерами Wildberries, Ozon и Яндекс Маркета, а также с импортёрами из Китая: можем нанести коды на товар прямо на складе в Китае, до отправки в Россию.</p>
+      <p>{{ "[ЗАПОЛНИТЬ: история компании, команда, опыт — черновик выше]" | stub | safe }}</p>
+    </div>
+    <div class="panel china-mini scales scales--right reveal">
+      <h2 class="two-col__title">Группа компаний с Дракон Трейд</h2>
+      <p>Дракон.Код работает в группе компаний с логистической компанией Дракон Трейд. Поэтому маркировку и доставку товара из Китая можно обсудить вместе.</p>
+      <p>{{ "[ЗАПОЛНИТЬ: как устроена совместная работа — черновик выше] [ПРОВЕРИТЬ формулировку]" | stub | safe }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="approach-title">
+  <div class="container">
+    {{ sectionHead("Как мы работаем", "approach-title") }}
+    {%- set approach = [
+      { icon: "list-check", title: "Проверяем до отправки", text: "Сверяем данные о товаре, чтобы коды и этикетки были без ошибок." },
+      { icon: "user", title: "Персональный менеджер", text: "Один человек ведёт ваш заказ, на связи и быстро решает вопросы." },
+      { icon: "coin", title: "Стоимость заранее", text: "Называем цену и сроки до начала работ. Обязательные расходы подсказываем отдельно." },
+      { icon: "building-store", title: "Знаем площадки", text: "Учитываем требования Wildberries, Ozon и Яндекс Маркета и особенности импорта." }
+    ] %}
+    <ul class="why">
+      {%- for w in approach %}
+      <li class="card why__card reveal">
+        <span class="card__icon">{% icon w.icon %}</span>
+        <h3 class="card__title">{{ w.title }}</h3>
+        <p class="card__text">{{ w.text }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="req-title">
+  <div class="container">
+    <div class="panel two-col-single reveal">
+      <h2 class="two-col__title" id="req-title">Реквизиты</h2>
+      <table class="requisites">
+        <tbody>
+          <tr><th scope="row">Организация</th><td>{{ site.legal.company | stub | safe }}</td></tr>
+          <tr><th scope="row">ИНН</th><td>{{ site.legal.inn | stub | safe }}</td></tr>
+          <tr><th scope="row">ОГРН</th><td>{{ site.legal.ogrn | stub | safe }}</td></tr>
+          <tr><th scope="row">Адрес</th><td>{{ site.legal.address | stub | safe }}</td></tr>
+          <tr><th scope="row">Банковские реквизиты</th><td>{{ "[ЗАПОЛНИТЬ]" | stub | safe }}</td></tr>
+        </tbody>
+      </table>
+      <p class="two-col__note">Не является официальным сайтом оператора системы «Честный знак».</p>
+    </div>
+  </div>
+</section>
+
+{{ leadSection() }}

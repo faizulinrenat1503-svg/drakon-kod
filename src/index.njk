@@ -63,34 +63,7 @@ description: "Маркировка «Честный знак» для селле
 </section>
 
 {#- 4. Маркировка в Китае -#}
-<section class="section section--tight" aria-labelledby="china-title">
-  <div class="container">
-    <div class="panel china scales scales--right reveal">
-      <div class="china__grid">
-        <div>
-          <h2 class="china__title" id="china-title">Маркировка в Китае — до отправки в Россию</h2>
-          <p class="china__text">Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
-          <div class="china__actions">{{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку в Китае") }}</div>
-        </div>
-        <ol class="china-steps">
-          {%- set chinaSteps = [
-            { icon: "file-text", text: "Оформляем коды заранее — пока товар ещё производится" },
-            { icon: "barcode", text: "Наносим на складе в Китае — каждая единица со своим кодом" },
-            { icon: "truck-delivery", text: "Товар приезжает готовым — сразу на склад маркетплейса" }
-          ] %}
-          {%- for st in chinaSteps %}
-          <li class="card china-step" style="position:relative">
-            <span class="china-step__icon">{% icon st.icon %}</span>
-            <span class="china-step__num">0{{ loop.index }}</span>
-            <span class="china-step__text">{{ st.text }}</span>
-            {%- if not loop.last %}<span class="china-step__arrow" aria-hidden="true">{% icon "arrow-right" %}</span>{% endif %}
-          </li>
-          {%- endfor %}
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
+{% include "components/china-block.njk" %}
 
 {#- 5. Калькулятор -#}
 <section class="section section--tight" aria-labelledby="calc-title">

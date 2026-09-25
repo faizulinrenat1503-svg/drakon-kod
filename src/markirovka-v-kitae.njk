@@ -1,0 +1,85 @@
+---
+layout: layouts/base.njk
+title: "Маркировка товаров в Китае до отправки в Россию"
+description: "Наносим коды маркировки на товар на складе в Китае: партия приезжает промаркированной и готовой к поставке на Wildberries, Ozon, Яндекс Маркет. Для импортёров."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadButton, leadSection, faqList, faqSchema, checkList, sectionHead with context -%}
+
+{{ breadcrumbs([{ title: "Маркировка в Китае", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__grid page-hero__grid--aside">
+    <div>
+      <p class="eyebrow">Для импортёров</p>
+      <h1 class="page-hero__title" id="page-title">Маркировка в Китае — <span class="hl">до отправки</span> в Россию</h1>
+      <p class="page-hero__lead">Наносим коды на товар прямо на складе в Китае. Партия приезжает уже промаркированной и готовой к поставке на маркетплейс.</p>
+      <div class="page-hero__actions">
+        {{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку в Китае") }}
+        {{ leadButton("Рассчитать стоимость", "outline", "", "Хочу рассчитать стоимость маркировки в Китае") }}
+      </div>
+    </div>
+    <ol class="china-steps china-steps--stack" aria-label="Коротко о процессе">
+      {%- for st in china.steps %}
+      <li class="card china-step">
+        <span class="china-step__icon">{% icon st.icon %}</span>
+        <span class="china-step__num">0{{ loop.index }}</span>
+        <span class="china-step__text">{{ st.text }}</span>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="stages-title">
+  <div class="container">
+    {{ sectionHead("Как это работает", "stages-title") }}
+    <ol class="stages">
+      {%- for st in china.stages %}
+      <li class="card stage reveal">
+        <span class="stage__num" aria-hidden="true">0{{ loop.index }}</span>
+        <h3 class="stage__title">{{ st.title }}</h3>
+        <p class="stage__text">{{ st.text | stub | safe }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="why-title">
+  <div class="container">
+    {{ sectionHead("Почему выгоднее маркировать до ввоза", "why-title") }}
+    <ul class="why why--3">
+      {%- for b in china.benefits %}
+      <li class="card why__card reveal">
+        <span class="card__icon">{% icon b.icon %}</span>
+        <h3 class="card__title">{{ b.title }}</h3>
+        <p class="card__text">{{ b.text | stub | safe }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="supplier-title">
+  <div class="container two-col">
+    <div class="panel reveal">
+      <h2 class="two-col__title" id="supplier-title">Что нужно от поставщика</h2>
+      {{ checkList(china.fromSupplier) }}
+    </div>
+    <div class="panel china-mini scales scales--right reveal">
+      <h2 class="two-col__title">Везёте с Дракон Трейд?</h2>
+      <p>Мы работаем в группе компаний с логистической компанией Дракон Трейд — маркировку и доставку можно обсудить вместе.</p>
+      {{ leadButton("Обсудить поставку", "primary", "", "Хочу обсудить маркировку и доставку из Китая") }}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="faq-title">
+  <div class="container">
+    {{ sectionHead("Вопросы о маркировке в Китае", "faq-title", "Все вопросы", "/voprosy/") }}
+    <div class="reveal">{{ faqList(china.faq) }}</div>
+  </div>
+</section>
+{{ faqSchema(china.faq) }}
+
+{{ leadSection("Обсудить поставку", "Расскажите, что и откуда везёте, — рассчитаем стоимость маркировки в Китае и сроки.", "", "Обсудить поставку") }}

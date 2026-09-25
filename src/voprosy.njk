@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+title: "Вопросы о маркировке товаров"
+description: "Ответы на частые вопросы о маркировке «Честный знак» для селлеров маркетплейсов: подключение, коды и этикетки, маркировка в Китае, оплата."
+---
+{%- from "components/macros.njk" import breadcrumbs, leadSection, faqList, faqSchema with context -%}
+{%- set allFaq = [] -%}
+{%- for topic in faq.topics -%}{%- for item in topic.items -%}{%- set _ = allFaq.push(item) -%}{%- endfor -%}{%- endfor -%}
+
+{{ breadcrumbs([{ title: "Вопросы", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Частые <span class="hl">вопросы</span></h1>
+    <p class="page-hero__lead">Собрали ответы на вопросы, которые чаще всего задают селлеры и импортёры. Не нашли свой — задайте его в заявке.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Вопросы по темам">
+  <div class="container">
+    <nav class="topics" aria-label="Темы">
+      {%- for topic in faq.topics %}
+      <a href="#{{ topic.id }}">{{ topic.title }}</a>
+      {%- endfor %}
+    </nav>
+    {%- for topic in faq.topics %}
+    <div class="faq-topic" id="{{ topic.id }}">
+      <h2 class="faq-topic__title">{{ topic.title }}</h2>
+      {{ faqList(topic.items) }}
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+{{ faqSchema(allFaq) }}
+
+{{ leadSection("Остались вопросы?", "Оставьте заявку — менеджер перезвонит и ответит на все вопросы.") }}

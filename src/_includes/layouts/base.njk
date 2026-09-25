@@ -1,5 +1,5 @@
 {%- from "components/macros.njk" import leadForm with context -%}
-{%- set pageTitle = (title + " — " + site.brand) if title and not fullTitle else (fullTitle or site.brand) -%}
+{%- set pageTitle = ((title | stripStubs) + " — " + site.brand) if title and not fullTitle else (fullTitle or site.brand) -%}
 {%- set pageDescription = description or site.defaultDescription -%}
 {%- set canonical = site.url + page.url -%}
 <!doctype html>

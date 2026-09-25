@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+---
+{%- from "components/macros.njk" import breadcrumbs, leadSection with context -%}
+{%- set g = groups | bySlug(group) -%}
+
+{{ breadcrumbs([{ title: "Новости", url: "/novosti/" }, { title: title | stripStubs, url: page.url }]) }}
+
+<article>
+  <header class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">{{ title | stub | safe }}</h1>
+      <p class="page-hero__meta">
+        <time datetime="{{ page.date | isoDate }}">{{ page.date | ruDate }}</time>
+        {%- if g %}<a class="chip" href="/tovarnye-gruppy/{{ g.slug }}/">{{ g.name }}</a>{% endif %}
+      </p>
+    </div>
+  </header>
+  <div class="container">
+    <div class="prose">{{ content | stubHtml | safe }}</div>
+    {%- if g %}
+    <p class="section__foot"><a class="link-arrow" href="/tovarnye-gruppy/{{ g.slug }}/"><span>Маркировка: {{ g.name }}</span>{% icon "arrow-right" %}</a></p>
+    {%- endif %}
+  </div>
+</article>
+
+{{ leadSection("Нужна помощь с маркировкой?", "Оставьте заявку — проверим ваш товар и расскажем, что делать.", group) }}
