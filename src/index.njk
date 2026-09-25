@@ -15,7 +15,7 @@ description: "Маркировка «Честный знак» для селле
       <h1 class="hero__title" id="hero-title">Маркировка для маркетплейсов — <span class="hl">без&nbsp;штрафов</span> и простоев</h1>
       <p class="hero__sub">Регистрация, карточки, коды и этикетки — под ключ. Везёте товар из Китая? Промаркируем прямо там.</p>
       <div class="hero__actions">
-        {{ leadButton("Рассчитать стоимость", "primary", "", "Хочу рассчитать стоимость маркировки") }}
+        <a class="btn btn--primary" href="#kalkulyator">Рассчитать стоимость {% icon "arrow-down" %}</a>
         {{ leadButton("Связаться с нами", "outline") }}
       </div>
       <ul class="stats">
@@ -66,7 +66,7 @@ description: "Маркировка «Честный знак» для селле
 {% include "components/china-block.njk" %}
 
 {#- 5. Калькулятор -#}
-<section class="section section--tight" aria-labelledby="calc-title">
+<section class="section section--tight" id="kalkulyator" aria-labelledby="calc-title">
   <div class="container">
     <div class="section__head reveal">
       <h2 class="section__title" id="calc-title">Сколько стоит маркировка</h2>
