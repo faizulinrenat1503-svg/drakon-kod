@@ -11,7 +11,7 @@ const RE = /\[(?:ЗАПОЛНИТЬ|ПРОВЕРИТЬ|АДРЕС|N)[^\]]*\]/g;
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const p = path.join(dir, e.name);
-    if (e.isDirectory()) return walk(p);
+    if (e.isDirectory()) return e.name === "assets" ? [] : walk(p); // в css/js метки только в комментариях
     return EXT.has(path.extname(e.name)) ? [p] : [];
   });
 }
