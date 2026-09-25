@@ -1,5 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { HtmlBasePlugin } from "@11ty/eleventy";
+
+// Предпросмотр на GitHub Pages: сайт лежит в подпапке /drakon-kod/.
+// PATH_PREFIX задаётся в .github/workflows/pages.yml; для боевого сайта — не задаётся ("/").
+const PATH_PREFIX = process.env.PATH_PREFIX || "/";
 
 const ICON_DIR = path.resolve("node_modules/@tabler/icons/icons/outline");
 const iconCache = new Map();
@@ -64,6 +69,9 @@ function stub(str) {
 }
 
 export default function (eleventyConfig) {
+  // Дописывает PATH_PREFIX ко всем ссылкам вида "/..." в готовом HTML.
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
 
@@ -99,5 +107,6 @@ export default function (eleventyConfig) {
     templateFormats: ["njk", "md"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
+    pathPrefix: PATH_PREFIX,
   };
 }

@@ -6,7 +6,8 @@
     "dev": "eleventy --serve",
     "build": "eleventy && node scripts/build-backend.js",
     "start": "eleventy --serve",
-    "stubs": "node scripts/stubs.js"
+    "stubs": "node scripts/stubs.js",
+    "preview": "node scripts/deploy-preview.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,8 @@
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/manrope": "^5.3.0",
     "@fontsource-variable/unbounded": "^5.3.0",
-    "@tabler/icons": "^3.48.0"
+    "@tabler/icons": "^3.48.0",
+    "gh-pages": "^6.3.0"
   },
   "private": true
 }

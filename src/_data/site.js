@@ -6,12 +6,16 @@
 // [ЗАПОЛНИТЬ] Домен сайта без https:// и без слеша на конце, например "drakon-kod.ru".
 const DOMAIN = "[ЗАПОЛНИТЬ-домен]";
 
-const SITE_URL = `https://${DOMAIN}`;
+// Для предпросмотра на GitHub Pages адрес сайта и режим PREVIEW задаются
+// в .github/workflows/pages.yml. Боевой сайт собирается без них.
+const SITE_URL = process.env.SITE_URL || `https://${DOMAIN}`;
 
 export default {
   brand: "Дракон.Код",
   domain: DOMAIN,
   url: SITE_URL,
+  // Предпросмотр: страницы закрыты от поисковиков (noindex, robots.txt Disallow).
+  preview: process.env.PREVIEW === "1",
   locale: "ru_RU",
   defaultDescription:
     "Центр маркировки товаров для селлеров Wildberries, Ozon, Яндекс Маркета и импортёров из Китая: подключение, карточки, коды и этикетки, ввод в оборот.",

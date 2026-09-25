@@ -10,7 +10,7 @@
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
   <link rel="canonical" href="{{ canonical }}">
-  {%- if noindex %}<meta name="robots" content="noindex">{% endif %}
+  {%- if noindex or site.preview %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <meta name="theme-color" content="#16202A">
 
   <meta property="og:type" content="website">
