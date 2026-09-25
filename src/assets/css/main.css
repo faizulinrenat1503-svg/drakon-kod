@@ -103,23 +103,23 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .scales::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-color: var(--c-scale);
-  -webkit-mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 78%);
+  -webkit-mask-image: url("../img/scale.svg"), radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 78%);
   -webkit-mask-size: 40px 40px, 100% 100%;
   -webkit-mask-repeat: repeat, no-repeat;
   -webkit-mask-composite: source-in;
-  mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 78%);
+  mask-image: url("../img/scale.svg"), radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 78%);
   mask-size: 40px 40px, 100% 100%;
   mask-repeat: repeat, no-repeat;
   mask-composite: intersect;
   border-radius: inherit;
 }
 .scales--left::before {
-  -webkit-mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 60% 90% at 0% 50%, #000 15%, transparent 75%);
-  mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 60% 90% at 0% 50%, #000 15%, transparent 75%);
+  -webkit-mask-image: url("../img/scale.svg"), radial-gradient(ellipse 60% 90% at 0% 50%, #000 15%, transparent 75%);
+  mask-image: url("../img/scale.svg"), radial-gradient(ellipse 60% 90% at 0% 50%, #000 15%, transparent 75%);
 }
 .scales--right::before {
-  -webkit-mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 55% 90% at 100% 50%, #000 15%, transparent 75%);
-  mask-image: url("/assets/img/scale.svg"), radial-gradient(ellipse 55% 90% at 100% 50%, #000 15%, transparent 75%);
+  -webkit-mask-image: url("../img/scale.svg"), radial-gradient(ellipse 55% 90% at 100% 50%, #000 15%, transparent 75%);
+  mask-image: url("../img/scale.svg"), radial-gradient(ellipse 55% 90% at 100% 50%, #000 15%, transparent 75%);
 }
 
 /* ---------- Карточки ---------- */
@@ -861,3 +861,6 @@ a.chip:hover { background: var(--c-accent-soft); }
 @media (min-width: 768px) { .china-steps--stack { grid-template-columns: 1fr; gap: 12px; } .china-steps--stack .china-step { grid-template-columns: auto 1fr; gap: 6px 16px; } .china-steps--stack .china-step__icon { grid-row: span 2; } }
 @media (min-width: 1100px) { .why--3 { grid-template-columns: repeat(3, 1fr); } }
 .page-alert { margin-top: 24px; }
+.lead-form__note { color: var(--c-muted); font-size: 14px; line-height: 1.5; }
+.lead-form__note a { color: var(--c-text); text-underline-offset: 3px; }
+.lead-form__note a:hover { color: var(--c-accent); }

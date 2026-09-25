@@ -58,6 +58,8 @@
 | Отзывы (сейчас скрыты) | `src/_data/reviews.json` + `features.reviews` в `site.js` |
 | Цвета, шрифты, радиусы | `src/assets/css/tokens.css` |
 | Логотип | `src/_includes/components/logo.njk` |
+| Шрифты (лежат на сайте, не Google Fonts — из-за 152-ФЗ) | `src/assets/fonts/` + `src/assets/css/fonts.css` |
+| Согласие на обработку ПД (отдельный документ, на него ведёт галочка в форме) | `src/soglasie.njk` |
 | Картинка для соцсетей | `src/assets/img/og-image.png` (1200×630) |
 
 Заглушки `[ЗАПОЛНИТЬ]` и `[ПРОВЕРИТЬ]` подсвечиваются на страницах янтарным, чтобы их было

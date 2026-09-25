@@ -52,11 +52,12 @@
       <label class="check">
         <input type="checkbox" name="consent" value="1" required aria-describedby="{{ id }}-consent-err">
         <span class="check__box">{% icon "check" %}</span>
-        <span>Согласен на <a href="/politika-konfidencialnosti/" target="_blank">обработку персональных данных</a></span>
+        <span>Даю <a href="/soglasie-na-obrabotku-personalnyh-dannyh/" target="_blank">согласие на обработку персональных данных</a></span>
       </label>
       <p class="field__error" id="{{ id }}-consent-err"></p>
     </div>
     <button class="btn btn--primary btn--block" type="submit">{{ submitText }} {% icon "arrow-right", "icon--arrow" %}</button>
+    <p class="lead-form__note">Как мы обрабатываем данные — в <a href="/politika-konfidencialnosti/" target="_blank">политике обработки персональных данных</a>.</p>
     <div class="lead-form__status" role="status" aria-live="polite"></div>
   </form>
   <div class="lead-success" tabindex="-1">

@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+permalink: /soglasie-na-obrabotku-personalnyh-dannyh/
+title: "Согласие на обработку персональных данных"
+description: "Согласие на обработку персональных данных при отправке заявки на сайте Дракон.Код."
+---
+{%- from "components/macros.njk" import breadcrumbs with context -%}
+
+{{ breadcrumbs([{ title: "Согласие на обработку персональных данных", url: page.url }]) }}
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 class="page-hero__title" id="page-title">Согласие на обработку персональных данных</h1>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container prose">
+    <p>{{ "[ЗАПОЛНИТЬ: юридический текст согласия — отдельный документ, не часть политики]" | stub | safe }}</p>
+    <p>Черновые данные для юриста {{ "[ПРОВЕРИТЬ]" | stub | safe }}:</p>
+    <ul>
+      <li>Оператор: {{ (site.legal.company + ", ИНН " + site.legal.inn + ", ОГРН " + site.legal.ogrn + ", " + site.legal.address) | stub | safe }}.</li>
+      <li>Какие данные собирает форма: имя, телефон, товарная группа, комментарий, адрес страницы, с которой отправлена заявка.</li>
+      <li>Цель: обработка заявки, расчёт стоимости и связь с клиентом.</li>
+      <li>Где хранятся данные: сервер хостинга на территории России, почтовый ящик для заявок.</li>
+      <li>Срок действия и порядок отзыва согласия: {{ "[ЗАПОЛНИТЬ]" | stub | safe }}</li>
+    </ul>
+    <p>Как мы обрабатываем данные — в <a href="/politika-konfidencialnosti/">политике обработки персональных данных</a>.</p>
+  </div>
+</section>
